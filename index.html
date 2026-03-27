@@ -2,20 +2,19 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Elena's Portfolio</title>
+    <title>Elena's World 🌿</title>
     <style>
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            /* Сделаем градиент поярче, чтобы его было видно */
+            font-family: 'Segoe UI', sans-serif; 
             background: linear-gradient(45deg, #f4f1ea, #d8e2dc, #ffe5d9);
             background-size: 400% 400%;
             animation: gradientAnimation 10s ease infinite;
-            color: #5d5d5d;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
 
         @keyframes gradientAnimation {
@@ -25,65 +24,98 @@
         }
 
         .card { 
-            background: #ffffff; 
+            background: rgba(255, 255, 255, 0.9); 
             padding: 40px; 
             border-radius: 30px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             border: 2px solid #e0d8c3;
             text-align: center;
             max-width: 400px;
-            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
-        .card:hover { transform: scale(1.02); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
 
-        h1 { color: #8c9a8e; font-size: 24px; }
-        .skills { font-weight: bold; color: #a68b7c; }
-        
+        h1 { color: #8c9a8e; margin-bottom: 10px; }
+        #quote-box { font-style: italic; color: #a68b7c; min-height: 40px; margin: 15px 0; }
+
         .tag {
-            background: #e9ecef;
-            padding: 5px 10px;
-            border-radius: 10px;
-            font-size: 14px;
-            margin: 5px;
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            margin: 4px;
             display: inline-block;
+            color: #777;
         }
 
         button {
             margin-top: 20px;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 15px;
+            border-radius: 20px;
             background-color: #8c9a8e;
             color: white;
+            font-weight: bold;
             cursor: pointer;
-            font-family: inherit;
+            transition: 0.2s;
         }
-        button:hover { background-color: #7a8a7c; }
+        button:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
-    <div class="card" id="mainCard">
-        <h1>Привет, я 🌿травка^_^</h1>
-        <p>Студентка IT, изучаю программирование и создаю интересные проекты (ещкерее).</p>
-        <hr style="border: 0; border-top: 1px dashed #e0d8c3; margin: 20px 0;">
-        <div class="skills">Мои технологии:</div>
-        <div class="tag">Java</div>
-        <div class="tag">SQL</div>
-        <div class="tag">HTML/CSS</div>
-        <div class="tag">JavaScript</div>
-        <br>
-        <button onclick="changeStyle()">✨ Магия</button>
-        <p style="font-size: 12px; margin-top: 20px;">Проект создан для практики в колледже</p>
+
+    <div class="card">
+        <h1>🌿 травка^_^</h1>
+        <div id="quote-box">Нажми на магию, чтобы услышать мысли...</div>
+        
+        <div class="tags">
+            <span class="tag">Java</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Cyberpunk Design</span>
+        </div>
+
+        <button onclick="playMagic()">✨ Магия</button>
+        
+        <p style="font-size: 10px; color: #ccc; margin-top: 25px;">Level 1 Programmer | GitHub Edition</p>
     </div>
 
     <script>
-        function changeStyle() {
-            const card = document.getElementById('mainCard');
-            const colors = ['#fff5f5', '#f5fff5', '#f5f5ff', '#ffffff'];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            card.style.backgroundColor = randomColor;
-            alert('Стиль карточки изменен! JS работает 🚀');
+        const quotes = [
+            "Всё будет хорошо, просто нужно время 🌸",
+            "Код работает? Не трогай! 💻",
+            "Waiting for something to happen? (Omori vibes)",
+            "Ещкереее! Ты молодец!",
+            "Сегодня отличный день, чтобы закоммитить что-то крутое."
+        ];
+
+        let clickCount = 0;
+
+        function playMagic() {
+            const context = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = context.createOscillator();
+            const gain = context.createGain();
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(880, context.currentTime); // Высокий звук
+            gain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 0.1);
+            
+            osc.connect(gain);
+            gain.connect(context.destination);
+            
+            osc.start();
+            osc.stop(context.currentTime + 0.1);
+
+            // 2. Меняем цитату
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('quote-box').innerText = randomQuote;
+
+            clickCount++;
+            if(clickCount === 10) {
+                alert("😏");
+                clickCount = 0;
+            }
         }
     </script>
 </body>
