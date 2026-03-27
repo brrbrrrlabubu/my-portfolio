@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title>Elena's Portfolio</title>
     <style>
-       body { 
+        body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: linear-gradient(135deg, #f4f1ea, #e8e2d2, #f4f1ea);
+            /* Сделаем градиент поярче, чтобы его было видно */
+            background: linear-gradient(45deg, #f4f1ea, #d8e2dc, #ffe5d9);
             background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite;
+            animation: gradientAnimation 10s ease infinite;
             color: #5d5d5d;
             display: flex;
             justify-content: center;
@@ -22,6 +23,7 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
         .card { 
             background: #ffffff; 
             padding: 40px; 
@@ -30,9 +32,14 @@
             border: 2px solid #e0d8c3;
             text-align: center;
             max-width: 400px;
+            transition: transform 0.3s ease;
         }
+
+        .card:hover { transform: scale(1.02); }
+
         h1 { color: #8c9a8e; font-size: 24px; }
         .skills { font-weight: bold; color: #a68b7c; }
+        
         .tag {
             background: #e9ecef;
             padding: 5px 10px;
@@ -41,19 +48,43 @@
             margin: 5px;
             display: inline-block;
         }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            background-color: #8c9a8e;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        button:hover { background-color: #7a8a7c; }
     </style>
 </head>
 <body>
-    <div class="card">
+    <div class="card" id="mainCard">
         <h1>Привет, я 🌿травка^_^</h1>
-        <p>Студентк IT, изучаю программирование и создаю интересные проекты(ещкерее).</p>
+        <p>Студентка IT, изучаю программирование и создаю интересные проекты (ещкерее).</p>
         <hr style="border: 0; border-top: 1px dashed #e0d8c3; margin: 20px 0;">
         <div class="skills">Мои технологии:</div>
         <div class="tag">Java</div>
-        <div class="tag">SQL Server</div>
+        <div class="tag">SQL</div>
         <div class="tag">HTML/CSS</div>
         <div class="tag">JavaScript</div>
+        <br>
+        <button onclick="changeStyle()">✨ Магия</button>
         <p style="font-size: 12px; margin-top: 20px;">Проект создан для практики в колледже</p>
     </div>
+
+    <script>
+        function changeStyle() {
+            const card = document.getElementById('mainCard');
+            const colors = ['#fff5f5', '#f5fff5', '#f5f5ff', '#ffffff'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            card.style.backgroundColor = randomColor;
+            alert('Стиль карточки изменен! JS работает 🚀');
+        }
+    </script>
 </body>
 </html>
