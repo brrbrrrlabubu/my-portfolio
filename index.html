@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <title>Elena's Portfolio</title>
     <style>
-        body { 
+       body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #f4f1ea;
+            background: linear-gradient(135deg, #f4f1ea, #e8e2d2, #f4f1ea);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
             color: #5d5d5d;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .card { 
             background: #ffffff; 
